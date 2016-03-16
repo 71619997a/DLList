@@ -17,8 +17,12 @@ public class DLLNode {
 	_nextNode = null;
 	_previousNode = null;
     }
-
+    public DLLNode( String value ) {
+	this();
+	_cargo = value;
+    }
     public DLLNode( String value,  DLLNode previous, DLLNode next) {
+	this();
 	_cargo = value;
 	_nextNode = next;
 	_previousNode = previous;
