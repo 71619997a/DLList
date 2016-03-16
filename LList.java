@@ -19,7 +19,7 @@ public class LList implements List { //your List interface must be in same dir
 
     //--------------v  List interface methods  v--------------
     public boolean add( String newVal ) { 
-	LLNode tmp = new LLNode( newVal, _head );
+	LLNode tmp = new LLNode( newVal, null, _head );
 	_head = tmp;
 	_size++;
 	return true;
@@ -86,12 +86,14 @@ public class LList implements List { //your List interface must be in same dir
 	    LLNode tmp = _head; //create alias to head
 
 	    //walk to node before desired node
-	    for( int i=0; i < index-1; i++ )
+	    for( int i=0; i < index; i++ )
 		tmp = tmp.getNext();
 
 	    //insert new node
-	    newNode.setNext( tmp.getNext() );
-	    tmp.setNext( newNode );
+	    newNode.setNext( tmp );
+	    newNode.setPrevious( tmp.getPrevious() );
+	    tmp.getPrevious.setNext( newNode );
+	    tmp.setPrevious( newNode );
 
 	    //increment size attribute
 	    _size++;
