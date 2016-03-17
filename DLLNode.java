@@ -4,21 +4,21 @@
  * Stores its data as a String
  *****************************************************/
 
-public class DLLNode {
+public class DLLNode <T> {
 
-    private String _cargo;    //cargo may only be of type String
+    private T _cargo;    //cargo may only be of type T
     private DLLNode _nextNode; //pointer to next DLLNode
     private DLLNode _previousNode; //pointer to previous DLLNode
 
 
     // constructor -- initializes instance vars
     public DLLNode() {
-	_cargo = "";
+	_cargo = null;
 	_nextNode = null;
 	_previousNode = null;
     }
 
-    public DLLNode( String value,  DLLNode previous, DLLNode next) {
+    public DLLNode( T value,  DLLNode previous, DLLNode next) {
 	_cargo = value;
 	_nextNode = next;
 	_previousNode = previous;
@@ -26,7 +26,7 @@ public class DLLNode {
 
 
     //--------------v  ACCESSORS  v--------------
-    public String getCargo() { return _cargo; }
+    public T getCargo() { return _cargo; }
 
     public DLLNode getNext() { return _nextNode; }
 
@@ -35,8 +35,8 @@ public class DLLNode {
 
 
     //--------------v  MUTATORS  v--------------
-    public String setCargo( String newCargo ) {
-	String foo = getCargo();
+    public T setCargo( T newCargo ) {
+	T foo = getCargo();
 	_cargo = newCargo;
 	return foo;
     }
@@ -65,16 +65,16 @@ public class DLLNode {
 	//Below is an exercise in creating a linked list...
 
 	//Create a node
-	DLLNode first = new DLLNode();
+	DLLNode<String> first = new DLLNode();
 	first.setCargo("cat");
 	System.out.println(first);
 
 	//Create a new node after the first
-	first.setNext( new DLLNode( "dog", first, null ) );
+	first.setNext( new DLLNode<Integer>( 12, first, null ) );
 
 	//Create a third node after the second (loops are fun)
 	//first.getNext().setNext( new DLLNode( "cow", first.getNext(), first ) );
-	first.getNext().setNext( new DLLNode( "cow", first.getNext(), null ) );
+	first.getNext().setNext( new DLLNode<Double>( 3.14, first.getNext(), null ) );
 	DLLNode temp = first; //create ptr to first so JGC doesn't take it
 	while( temp != null ) {
 	    System.out.println( temp );
