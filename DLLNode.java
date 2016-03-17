@@ -17,7 +17,6 @@ public class DLLNode <T> {
 	_nextNode = null;
 	_previousNode = null;
     }
-<<<<<<< HEAD
 
     public DLLNode( T value ) {
 	this();
