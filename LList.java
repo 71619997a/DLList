@@ -8,19 +8,27 @@ public class LList<T> implements List<T> { //your List interface must be in same
 
     //instance vars
     private DLLNode<T> _head;
+    private DLLNode<T> _tail;
     private int _size;
 
     // constructor -- initializes instance vars
     public LList( ) {
 	_head = null; //at birth, a list has no elements
+	_tail = null;
 	_size = 0;
     }
 
 
     //--------------v  List interface methods  v--------------
-    public boolean add( T newVal ) { 
-	DLLNode<T> tmp = new DLLNode<T>( newVal, null, _head );
-	_head = tmp;
+    public boolean add( T newVal ) {
+	if(_size == 0) {
+	    _tail = new DLLNode<T>( newVal, null, null);
+	    _head = _tail;
+	    _size++;
+	    return true;
+	}
+	link(_tail, new DLLNode<T>( newVal, _tail, null ));
+	_tail = _tail.getNext();
 	_size++;
 	return true;
     } 
@@ -76,9 +84,12 @@ public class LList<T> implements List<T> { //your List interface must be in same
 
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
-
-	//if index==0, insert node before head node
-	if ( index == 0 ) { add( newVal ); return; }
+	if( index == 0 ) {
+	    link(new DLLNode<T>(newVal,null,_head), _head);
+	    _head = _head.getPrevious();
+	    _size++;
+	    return;
+	}
 	else {
 	    DLLNode<T> tmp = _head; //create alias to head
 
