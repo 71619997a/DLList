@@ -4,7 +4,7 @@
  * new in v2: add-at-index, remove
  *****************************************************/
 
-public class LList implements List { //your List interface must be in same dir
+public class LList<T> implements List<T> { //your List interface must be in same dir
 
     //instance vars
     private LLNode _head;
