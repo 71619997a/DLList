@@ -1,13 +1,13 @@
 /*****************************************************
  * class LList
- * Implements a linked list of DLLNodes, each containing String data
+ * Implements a linked list of DLLNode<T>s, each containing T data
  * new in v2: add-at-index, remove
  *****************************************************/
 
 public class LList<T> implements List<T> { //your List interface must be in same dir
 
     //instance vars
-    private DLLNode _head;
+    private DLLNode<T> _head;
     private int _size;
 
     // constructor -- initializes instance vars
@@ -18,21 +18,21 @@ public class LList<T> implements List<T> { //your List interface must be in same
 
 
     //--------------v  List interface methods  v--------------
-    public boolean add( String newVal ) { 
-	DLLNode tmp = new DLLNode( newVal, null, _head );
+    public boolean add( T newVal ) { 
+	DLLNode<T> tmp = new DLLNode<T>( newVal, null, _head );
 	_head = tmp;
 	_size++;
 	return true;
     } 
 
 
-    public String get( int index ) { 
+    public T get( int index ) { 
 
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
 
-	String retVal;
-	DLLNode tmp = _head; //create alias to head
+	T retVal;
+	DLLNode<T> tmp = _head; //create alias to head
 
 	//walk to desired node
 	for( int i=0; i < index; i++ )
@@ -44,19 +44,19 @@ public class LList<T> implements List<T> { //your List interface must be in same
     } 
 
 
-    public String set( int index, String newVal ) { 
+    public T set( int index, T newVal ) { 
 
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
 
-	DLLNode tmp = _head; //create alias to head
+	DLLNode<T> tmp = _head; //create alias to head
 
 	//walk to desired node
 	for( int i=0; i < index; i++ )
 	    tmp = tmp.getNext();
 
 	//store target node's cargo
-	String oldVal = tmp.getCargo();
+	T oldVal = tmp.getCargo();
 	
 	//modify target node's cargo
 	tmp.setCargo( newVal );
@@ -72,7 +72,7 @@ public class LList<T> implements List<T> { //your List interface must be in same
 
 
     //insert a node containing newVal at position index
-    public void add( int index, String newVal ) {
+    public void add( int index, T newVal ) {
 
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
@@ -80,14 +80,14 @@ public class LList<T> implements List<T> { //your List interface must be in same
 	//if index==0, insert node before head node
 	if ( index == 0 ) { add( newVal ); return; }
 	else {
-	    DLLNode tmp = _head; //create alias to head
+	    DLLNode<T> tmp = _head; //create alias to head
 
 	    //walk to one before the node
 	    for( int i=1; i < index; i++ )
 		tmp = tmp.getNext();
 
 	    //create node for insertion
-	    DLLNode newNode = new DLLNode(newVal, tmp, tmp.getNext());
+	    DLLNode<T> newNode = new DLLNode<T>(newVal, tmp, tmp.getNext());
 
 	    // establish linkage
 	    link(newNode.getPrevious(), newNode);
@@ -100,13 +100,13 @@ public class LList<T> implements List<T> { //your List interface must be in same
 
 
     //remove node at pos index, return its cargo
-    public String remove( int index ) {
+    public T remove( int index ) {
 
 	if ( index < 0 || index >= size() )
 	    throw new IndexOutOfBoundsException();
 
-	String retVal;
-	DLLNode tmp = _head; //create alias to head
+	T retVal;
+	DLLNode<T> tmp = _head; //create alias to head
 
 	//if index==0, remove head node
 	if ( index == 0 ) {
@@ -135,8 +135,8 @@ public class LList<T> implements List<T> { //your List interface must be in same
 	return retVal;
     }
 
-    // helper method to link two DLLNodes
-    public boolean link(DLLNode left, DLLNode right) {
+    // helper method to link two DLLNode<T>s
+    public boolean link(DLLNode<T> left, DLLNode<T> right) {
 	if (left != null)
 	    left.setNext(right);
 	if (right != null)
@@ -147,7 +147,7 @@ public class LList<T> implements List<T> { //your List interface must be in same
     // override inherited toString
     public String toString() { 
 	String retStr = "HEAD->";
-	DLLNode tmp = _head; //init tr
+	DLLNode<T> tmp = _head; //init tr
 	while( tmp != null ) {
 	    retStr += tmp.getCargo() + "->";
 	    tmp = tmp.getNext();
@@ -160,7 +160,7 @@ public class LList<T> implements List<T> { //your List interface must be in same
     //main method for testing
     public static void main( String[] args ) {
 
-	LList james = new LList();
+	LList<String> james = new LList<String>();
 
 	System.out.println( james );
 	System.out.println( "size: " + james.size() );
