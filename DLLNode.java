@@ -17,8 +17,14 @@ public class DLLNode <T> {
 	_nextNode = null;
 	_previousNode = null;
     }
+<<<<<<< HEAD
 
+    public DLLNode( T value ) {
+	this();
+	_cargo = value;
+    }
     public DLLNode( T value,  DLLNode previous, DLLNode next) {
+	this();
 	_cargo = value;
 	_nextNode = next;
 	_previousNode = previous;
